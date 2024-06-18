@@ -47,6 +47,7 @@ input[type="number"]::-webkit-outer-spin-button {
                                     Delete
                                 </button> -->
                 </div>
+                </form>
                 <form action="{{ route('delete.product', ['id' => $x->id]) }}" method="POST" class="desc w-100">
                 <div class="row w-50 gap-1">
                     @csrf
@@ -54,9 +55,9 @@ input[type="number"]::-webkit-outer-spin-button {
                     <button class="btn btn-danger col-sm-5">
                         <i class="fa fa-trash-alt">Hapus</i>
                     </button>
+                </div>
                 </form>
             </div>
-        </form>
     </div>
 </div>
 @endforeach

@@ -114,7 +114,7 @@ class Controller extends BaseController
         ]);
     }
 
-    public function deleteFromCart($id)
+    public function prosesDeleteCheckout($id)
     {
         // Find the item in the cart by its ID
         $item = tblCart::find($id);

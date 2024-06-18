@@ -30,7 +30,7 @@ Route::get('/contact', [Controller::class, 'contact'])->name('contact');
 
 Route::get('/checkout', [Controller::class, 'checkout'])->name('checkout');
 Route::POST('/checkout/proses/{id}', [Controller::class, 'prosesCheckout'])->name('checkout.product');
-Route::DELETE('/checkout/delete/{id}', [Controller::class, 'deleteFromCart'])->name('delete.product');
+Route::DELETE('/checkout/delete/{id}', [Controller::class, 'prosesDeleteCheckout'])->name('delete.product');
 Route::POST('/checkout/prosesPembayaran', [Controller::class, 'prosesPembayaran'])->name('checkout.bayar');
 Route::get('/checkOut', [Controller::class, 'keranjang'])->name('keranjang');
 Route::get('/checkOut/{id}', [Controller::class, 'bayar'])->name('keranjang.bayar');
