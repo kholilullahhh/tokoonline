@@ -23,14 +23,9 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="type" class="col-sm-5 col-form-label">Type Product</label>
+                        <label for="nameProduct" class="col-sm-5 col-form-label">Pengarang</label>
                         <div class="col-sm-7">
-                            <select type="text" class="form-control" id="type" name="type">
-                                <option value=""> Pilih Type </option>
-                                <option value="celana">Celana</option>
-                                <option value="baju">Baju</option>
-                                <option value="aksesoris">Aksesoris</option>
-                            </select>
+                            <input type="text" class="form-control" id="nameProduct" name="type">
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -38,9 +33,9 @@
                         <div class="col-sm-7">
                             <select type="text" class="form-control" id="kategori" name="kategori">
                                 <option value=""> Pilih Kategori </option>
-                                <option value="Pria">Pria</option>
-                                <option value="Wanita">Wanita</option>
-                                <option value="Anak-anak">Anak-anak</option>
+                                <option value="#">Novel</option>
+                                <option value="#">Komik</option>
+                                <option value="#">Education</option>
                             </select>
                         </div>
                     </div>

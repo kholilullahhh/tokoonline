@@ -139,28 +139,37 @@ class UserController extends Controller
         return redirect()->route('home');
     }
     public function loginProses(Request $request)
-    {
-        $dataLogin = [
-            'email' => $request->email,
-            'password'  => $request->password,
-        ];
+{
+    $dataLogin = [
+        'email' => $request->email,
+        'password' => $request->password,
+    ];
 
-        $user = new User;
-        $proses = $user::where('email', $request->email)->first();
+    // Find user by email
+    $user = User::where('email', $request->email)->first();
 
-        if ($proses->is_active === 0) {
-            Alert::toast('Kamu belum register', 'error');
-            return back();
-        }
-        if (Auth::attempt($dataLogin)) {
-            Alert::toast('Kamu berhasil login', 'success');
-            $request->session()->regenerate();
-            return redirect()->intended('/');
-        } else {
-            Alert::toast('Email dan Password salah', 'error');
-            return back();
-        }
+    // Check if user exists
+    if (!$user) {
+        Alert::toast('Email tidak ditemukan', 'error');
+        return back();
     }
+
+    // Check if user is active
+    if ($user->is_active === 0) {
+        Alert::toast('Kamu belum register', 'error');
+        return back();
+    }
+
+    // Attempt to login
+    if (Auth::attempt($dataLogin)) {
+        Alert::toast('Kamu berhasil login', 'success');
+        $request->session()->regenerate();
+        return redirect()->intended('/');
+    } else {
+        Alert::toast('Email dan Password salah', 'error');
+        return back();
+    }
+}
 
     public function logout()
     {

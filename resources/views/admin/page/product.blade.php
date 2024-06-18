@@ -19,7 +19,7 @@
                         <th>Date In</th>
                         <th>SKU</th>
                         <th>Product Name</th>
-                        <th>Category</th>
+                        <th>Pengarang</th>
                         <th>Price</th>
                         <th>Stock</th>
                         <th>#</th>
