@@ -66,7 +66,7 @@
                         </div>
                     </div>
 
-                    <div class="mb-3 row">
+                    <!-- <div class="mb-3 row">
                         <label for="foto" class="col-sm-3 col-form-label">Foto Product</label>
                         <div class="col-sm-9">
                             <input type="hidden" name="foto">
@@ -74,7 +74,7 @@
                                 name="foto" onchange="previewImg()">
                             <img class="mt-2 preview" style="width: 100px;">
                         </div>
-                    </div>
+                    </div> -->
 
                     <button type="submit" class="btn btn-success col-sm-12">Register</button>
                     </p>

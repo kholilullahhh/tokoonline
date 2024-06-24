@@ -131,7 +131,7 @@ class Controller extends BaseController
         }
 
         // Redirect back to the cart page
-        return redirect()->route('checkout');
+        return redirect()->route('shop');
     }
 
 
@@ -208,6 +208,7 @@ class Controller extends BaseController
         ]);
     }
 
+    //midtrans 
     // public function bayar($id)
     // {
     //     $find_data = transaksi::find($id);
@@ -269,10 +270,18 @@ class Controller extends BaseController
     }
     public function report()
     {
-        return view('admin.page.report', [
-            'name'      => "Report",
-            'title'     => 'Admin Report',
-        ]);
+        $data = transaksi::all();
+        return view('admin.page.report', compact('data'));
+    }
+    
+    public function filter(Request $request)
+    {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $data = transaksi::whereBetween('created_at', [$startDate, $endDate])->get();
+
+        return view('admin.page.report', compact('data'));
     }
     public function login()
     {

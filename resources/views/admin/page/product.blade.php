@@ -72,87 +72,93 @@
     <div class="tampilEditData" style="display: none;"></div>
 
     <script>
-        $('#addData').click(function() {
-            $.ajax({
-                url: '{{ route('addModal') }}',
-                success: function(response) {
-                    $('.tampilData').html(response).show();
-                    $('#addModal').modal("show");
-                }
-            });
+    // Menangani penambahan data melalui modal
+    $('#addData').click(function() {
+        $.ajax({
+            url: '{{ route('addModal') }}',
+            success: function(response) {
+                $('.tampilData').html(response).show();
+                $('#addModal').modal("show");
+            }
         });
+    });
 
-        $('.editModal').click(function(e) {
-            e.preventDefault();
-            var id = $(this).data('id');
+    // Menangani pengeditan data melalui modal
+    $('.editModal').click(function(e) {
+        e.preventDefault();
+        var id = $(this).data('id');
 
-            $.ajax({
-                type: "GET",
-                url: "{{ route('editModal', ['id' => ':id']) }}".replace(':id', id),
-                success: function(response) {
-                    $('.tampilEditData').html(response).show();
-                    $('#editModal').modal("show");
-                }
-            });
+        $.ajax({
+            type: "GET",
+            url: "{{ route('editModal', ['id' => ':id']) }}".replace(':id', id),
+            success: function(response) {
+                $('.tampilEditData').html(response).show();
+                $('#editModal').modal("show");
+            }
         });
+    });
 
-        $.ajaxSetup({
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+    // Menyetel token CSRF untuk semua permintaan AJAX
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+    });
+
+    // Menangani penghapusan data
+    $('.deleteData').click(function(e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        var sku = $('#sku').val();
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener("mouseenter", Swal.stopTimer);
+                toast.addEventListener("mouseleave", Swal.resumeTimer);
             },
+            didClose: () => {
+                window.location.reload();
+            }
         });
-        $('.deleteData').click(function(e) {
-            e.preventDefault();
-            var id = $(this).data('id');
-            var sku = $('#sku').val();
-            const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener("mouseenter", Swal.stopTimer);
-                    toast.addEventListener("mouseleave", Swal.resumeTimer);
-                    setTimeout(function() {
-                        window.location.reload();
-                    }, 1000);
-                },
-            });
 
-            Swal.fire({
-                title: 'Hapus data ?',
-                text: "Kamu yakin untuk menghapus SKU " + sku + " ?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        type: "DELETE",
-                        url: "{{ route('deleteData', ['id' => ':id']) }}".replace(':id', id),
-                        dataType: "json",
-                        success: function(response) {
-                            if (response.success) {
-                                Toast.fire({
-                                    icon: "success",
-                                    title: response.success,
-                                });
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            // Tampilkan notifikasi error jika terjadi kesalahan
-                            Swal.fire({
-                                title: 'Error',
-                                text: 'Terjadi kesalahan saat menghapus data',
-                                icon: 'error'
+        Swal.fire({
+            title: 'Hapus data?',
+            text: "Kamu yakin untuk menghapus SKU " + sku + " ?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "DELETE",
+                    url: "{{ route('deleteData', ['id' => ':id']) }}".replace(':id', id),
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.success) {
+                            Toast.fire({
+                                icon: "success",
+                                title: response.success,
                             });
                         }
-                    });
-                }
-            })
+                    },
+                    error: function(xhr, status, error) {
+                        // Tampilkan notifikasi error jika terjadi kesalahan
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'Terjadi kesalahan saat menghapus data',
+                            icon: 'error'
+                        });
+                    }
+                });
+            }
         });
-    </script>
+    });
+</script>
+
 @endsection

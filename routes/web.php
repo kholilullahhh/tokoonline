@@ -60,4 +60,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::DELETE('/admin/deleteData/{id}', [ProductController::class, 'destroy'])->name('deleteData');
 
     Route::GET('/admin/transaksi', [TransaksiAdminController::class, 'index'])->name('transaksi.admin');
+
+
+    Route::get('admin/report/filter', [Controller::class, 'filter'])->name('transaksi.filter');
 });

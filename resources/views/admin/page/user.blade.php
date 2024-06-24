@@ -15,7 +15,6 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Foto</th>
                         <th>NIK</th>
                         <th>Join Date</th>
                         <th>Nama Karyawan</th>
@@ -28,15 +27,15 @@
                     @foreach ($data as $y => $x)
                         <tr class="align-middle">
                             <td>{{ ++$y }}</td>
-                            <td>
+                            <!-- <td>
                                 <img src="{{ asset('storage/user/' . $x->foto) }}" style="width:100px;">
-                            </td>
+                            </td> -->
                             <td>{{ $x->nik }}</td>
                             <td>{{ $x->created_at }}</td>
                             <td>{{ $x->name }}</td>
                             <td>
                                 <span
-                                    class='badge text-bg-{{ $x->role === 1 ? 'info' : 'success' }}'>{{ $x->role === 1 ? 'Admin' : 'Manager' }}</span>
+                                    class="badge text-bg-{{ $x->role === 1 ? 'info' : 'success' }}">{{ $x->role === 1 ? 'Admin' : 'Manager' }}</span>
                             </td>
                             <td>
                                 <span

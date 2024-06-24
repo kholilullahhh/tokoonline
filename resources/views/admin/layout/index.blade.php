@@ -25,7 +25,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     @stack('style')
-    <title>Toko Online | {{ $title }}</title>
+    <title>Toko Online </title>
 </head>
 
 <body>

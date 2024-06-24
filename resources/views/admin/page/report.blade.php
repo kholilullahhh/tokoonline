@@ -1,42 +1,48 @@
 @extends('admin.layout.index')
 
 @section('content')
-    <div class="d-flex flex-row justify-content-start gap-2 align-items-center">
-        <div class="card">
-            <div class="card-header">
-                <h4 style="font-size: 16px;">Export data transaksi</h4>
-            </div>
-            <div class="card-body">
-                <div class="d-flex flex-row gap-3">
-                    <div class="d-flex flex-column">
-                        <label for="dateStart">Tanggal Mulai</label>
-                        <input type="date" name="dateStart" class="form-control">
-                    </div>
-                    <div class="d-flex flex-column">
-                        <label for="dateEnd">Tanggal Akhir</label>
-                        <input type="date" name="dateEnd" class="form-control">
-                    </div>
-                </div>
-                <button class="btn btn-success mt-4"> Export</button>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                <h4 style="font-size: 16px;">Export data product</h4>
-            </div>
-            <div class="card-body">
-                <div class="d-flex flex-row gap-3">
-                    <div class="d-flex flex-column">
-                        <label for="dateStart">Tanggal Mulai</label>
-                        <input type="date" name="dateStart" class="form-control">
-                    </div>
-                    <div class="d-flex flex-column">
-                        <label for="dateEnd">Tanggal Akhir</label>
-                        <input type="date" name="dateEnd" class="form-control">
-                    </div>
-                </div>
-                <button class="btn btn-success mt-4"> Export</button>
-            </div>
-        </div>
-    </div>
+
+<h1>Data Transaksi</h1>
+
+<form method="GET" action="{{ route('transaksi.filter') }}">
+    <label for="start_date">Start Date:</label>
+    <input type="date" id="start_date" name="start_date">
+
+    <label for="end_date">End Date:</label>
+    <input type="date" id="end_date" name="end_date">
+
+    <button type="submit">Filter</button>
+</form>
+
+<table class="table table-responsive table-striped">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Date</th>
+                        <th>Id Transaksi</th>
+                        <th>Nama</th>
+                        <th>Alamat</th>
+                        <th>Nilai Trx</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($data as $x => $item)
+                        <tr class="align-middle">
+                            <td>{{ ++$x }}</td>
+                            <td>{{ $item->created_at }}</td>
+                            <td>{{ $item->code_transaksi }}</td>
+                            <td>{{ $item->nama_customer }}</td>
+                            <td>{{ $item->alamat }}</td>
+                            <td>{{ $item->total_harga }}</td>
+                            <td>
+                                <span
+                                    class="align-middle {{ $item->status === 'Paid' ? 'badge bg-success text-white' : 'badge bg-danger text-white' }}">
+                                    {{ $item->status }}
+                                </span>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
 @endsection
