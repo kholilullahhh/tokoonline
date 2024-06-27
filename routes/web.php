@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransaksiAdminController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BukuController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
 
 Route::get('/', [TransaksiController::class, 'index'])->name('home');
 Route::POST('/addTocart', [TransaksiController::class, 'addTocart'])->name('addTocart');
@@ -45,6 +48,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/product', [ProductController::class, 'index'])->name('product');
     Route::get('/admin/logout', [Controller::class, 'logout'])->name('logout');
     Route::get('/admin/report', [Controller::class, 'report'])->name('report');
+    Route::POST('admin/report/filter', [Controller::class, 'filter'])->name('transaksi.filter');
     Route::get('/admin/addModal', [ProductController::class, 'addModal'])->name('addModal');
 
     Route::GET('/admin/user_management', [UserController::class, 'index'])->name('userManagement');
@@ -61,6 +65,11 @@ Route::group(['middleware' => 'admin'], function () {
 
     Route::GET('/admin/transaksi', [TransaksiAdminController::class, 'index'])->name('transaksi.admin');
 
-
-    Route::get('admin/report/filter', [Controller::class, 'filter'])->name('transaksi.filter');
+    route::get('/admin/index', [BukuController::class, 'index'])->name('index');
+    route::get('/admin/create',[BukuController::class, 'create'])->name('create');
+    Route::get('/products/{id}', [BukuController::class, 'show'])->name('products.show');
+    route::post('/admin/store',[BukuController::class, 'store'])->name('store');
+    route::get('/admin/edit/{id}',[BukuController::class, 'edit'])->name('edit');
+    route::post('/admin/update/{id}',[BukuController::class, 'update'])->name('update');
+    route::delete('/admin/delete{id}',[BukuController::class, 'delete'])->name('delete');
 });

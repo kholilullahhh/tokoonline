@@ -271,7 +271,12 @@ class Controller extends BaseController
     public function report()
     {
         $data = transaksi::all();
-        return view('admin.page.report', compact('data'));
+        return view('admin.page.report',[
+            'name' => 'report',
+            'title' => 'report',
+            'data'  => $data
+        ]);
+        
     }
     
     public function filter(Request $request)
@@ -281,7 +286,11 @@ class Controller extends BaseController
 
         $data = transaksi::whereBetween('created_at', [$startDate, $endDate])->get();
 
-        return view('admin.page.report', compact('data'));
+            return view('admin.page.report',[
+                'name' => 'report',
+                'title' => 'report',
+                'data'  => $data
+            ]);
     }
     public function login()
     {

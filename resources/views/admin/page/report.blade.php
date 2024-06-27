@@ -4,7 +4,8 @@
 
 <h1>Data Transaksi</h1>
 
-<form method="GET" action="{{ route('transaksi.filter') }}">
+<form method="GET" action="{{ route('transaksi.filter') }}" method=POST>
+    @csrf      
     <label for="start_date">Start Date:</label>
     <input type="date" id="start_date" name="start_date">
 

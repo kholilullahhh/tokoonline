@@ -44,6 +44,14 @@
                     </div>
                 </a>
             </li>
+            <li class="navbar-item rounded {{ Request::path() === 'admin/index' ? 'bg-info' : '' }} ">
+                <a href="index" class="">
+                    <div class="d-flex gap-3">
+                        <span class="material-icons">people_alt</span>
+                        <p class="m-0 p-0">Crud</p>
+                    </div>
+                </a>
+            </li>
             <li class="navbar-item">
                 <a href="logout" class="">
                     <div class="d-flex gap-3">

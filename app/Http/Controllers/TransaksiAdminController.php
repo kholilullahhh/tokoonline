@@ -10,6 +10,9 @@ class TransaksiAdminController extends Controller
     public function index()
     {
         $data = transaksi::paginate(10);
-        return view('admin.page.transaksi', ['title' => "Transaksi", 'name' => 'Transaksi', 'data' => $data]);
+        return view('admin.page.transaksi', [
+            'title' => "Transaksi", 
+            'name' => 'Transaksi', 
+            'data' => $data]);
     }
 }
